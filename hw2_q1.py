@@ -18,22 +18,18 @@ MORSE_CODE = {'A': '.-',     'B': '-...',   'C': '-.-.',
               }
 
 
-def english_to_morse(
-    input_file: str = "lorem.txt",
-    output_file: str = "lorem_morse.txt"
-):
-    """Convert an input text file to an output Morse code file.
+def english_to_morse(input_file: str = "lorem.txt", output_file: str = "lorem_morse.txt"):
 
-    Notes
-    -----
-    This function assumes the existence of a MORSE_CODE dictionary, containing a
-    mapping between English letters and their corresponding Morse code.
+    with open(input_file, 'r') as file:
+        content = file.read()
 
-    Parameters
-    ----------
-    input_file : str
-        Path to file containing the text file to convert.
-    output_file : str
-        Name of output file containing the translated Morse code. Please don't change
-        it since it's also hard-coded in the tests file.
-    """
+    content_upper = content.upper()
+
+    morse_content = content_upper.translate(str.maketrans(MORSE_CODE))
+
+    morse_content = morse_content.replace('  ', '\n')
+
+    with open(output_file, 'w') as file:
+        file.write(morse_content)
+
+english_to_morse()
