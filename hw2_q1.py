@@ -21,15 +21,15 @@ MORSE_CODE = {'A': '.-',     'B': '-...',   'C': '-.-.',
 def english_to_morse(input_file: str = "lorem.txt", output_file: str = "lorem_morse.txt"):
 
     with open(input_file, 'r') as file:
-        content = file.read()
+        text = file.read()
 
-    content_upper = content.upper()
+    text = text.upper()
 
-    morse_content = content_upper.translate(str.maketrans(MORSE_CODE))
+    translation_table = str.maketrans(MORSE_CODE)
 
-    morse_content = morse_content.replace('  ', '\n')
+    morse_text = text.translate(translation_table)
+
+    morse_words = '\n'.join(morse_text.split())
 
     with open(output_file, 'w') as file:
-        file.write(morse_content)
-
-english_to_morse()
+        file.write(morse_words)
